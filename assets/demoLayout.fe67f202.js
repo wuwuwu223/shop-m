@@ -1,0 +1,1 @@
+import{J as o,a,c as s,h as r,t as _,d as c,b as n,F as p,o as u}from"./index.8d236b8f.js";import{_ as l}from"./plugin-vue_export-helper.21dcd24c.js";const d={class:"page-title"},i={name:"demoLayout",setup(m){const e=o();return(v,f)=>{const t=a("router-view");return u(),s(p,null,[r("div",d,_(c(e)),1),n(t)],64)}}};var x=l(i,[["__scopeId","data-v-c8f90f3a"]]);export{x as default};
