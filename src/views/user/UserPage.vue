@@ -70,6 +70,24 @@ const cellList = reactive([
     'is-link': true
   },
   {
+    title: '订单',
+    value: '',
+    label: '',
+    icon: 'balance-list-o',
+    to: '',
+    border: true,
+    'is-link': true
+  },
+  {
+    title: '地址管理',
+    value: '',
+    label: '',
+    icon: 'balance-list-o',
+    to: '/addressList',
+    border: true,
+    'is-link': true
+  },
+  {
     title: '设置',
     value: '',
     label: '',

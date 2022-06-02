@@ -1,10 +1,14 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
 import permission from './permission'
 import demoRouters from './demo'
 
 const HomePage = () => import('../views/home/HomePage.vue')
 const ListPage = () => import('../views/list/ListPage.vue')
 const ShoppingCartPage = () => import('../views/ShoppingCart/ShoppingCartPage.vue')
+const SearchPage = () => import('../views/search/SearchPage.vue')
+const GoodDetail = () => import('../views/good/GoodPage.vue')
+const GoodPublishIndex = () => import('../views/good/PublishIndex.vue')
+const GoodPublish = () => import('../views/good/PublishGood.vue')
 const UserPage = () => import('../views/user/UserPage.vue')
 const NotFoundPage = () => import('../views/common/NotFoundPage.vue')
 const LoginPage = () => import('../views/common/LoginPage.vue')
@@ -13,9 +17,11 @@ const ForgetPage = () => import('../views/common/ForgetPage.vue')
 const UserInfoPage = () => import('../views/user/UserInfoPage.vue')
 const ChangeNamePage = () => import('../views/user/ChangeNamePage.vue')
 const ChangePasswordPage = () => import('../views/user/ChangePasswordPage.vue')
-
+const AddressList = () => import('../views/address/addresslist.vue')
+const addressEdit = () => import('../views/address/addressEdit.vue')
+const OrderDetail = () => import('../views/order/OrderDetail.vue')
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     ...demoRouters,
     {
@@ -42,7 +48,43 @@ const router = createRouter({
       component: ShoppingCartPage,
       meta: {
         requiresAuth: true,
-        title: '购物车'
+        title: '消息'
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchPage,
+      meta: {
+        requiresAuth: false,
+        title: '搜索'
+      }
+    },
+    {
+      path: '/good/detail',
+      name: 'goodDetail',
+      component: GoodDetail,
+      meta: {
+        requiresAuth: false,
+        title: '商品详情'
+      }
+    },
+    {
+      path: '/good/publish/index',
+      name: 'goodPublishIndex',
+      component: GoodPublishIndex,
+      meta: {
+        requiresAuth: true,
+        title: '发布商品选择类型'
+      }
+    },
+    {
+      path: '/good/publish/good',
+      name: 'goodPublish',
+      component: GoodPublish,
+      meta: {
+        requiresAuth: false,
+        title: '发布商品'
       }
     },
     {
@@ -61,6 +103,24 @@ const router = createRouter({
       meta: {
         requiresAuth: true,
         title: '个人信息'
+      }
+    },
+    {
+      path: '/addressList',
+      name: 'AddressList',
+      component: AddressList,
+      meta: {
+        requiresAuth: true,
+        title: '地址管理'
+      }
+    },
+    {
+      path: '/addressEdit',
+      name: 'AddressEdit',
+      component: addressEdit,
+      meta: {
+        requiresAuth: true,
+        title: '地址编辑'
       }
     },
     {
@@ -88,6 +148,15 @@ const router = createRouter({
       meta: {
         requiresAuth: false,
         title: '登录'
+      }
+    },
+    {
+      path: '/orderDetail',
+      name: 'orderDetail',
+      component: OrderDetail,
+      meta: {
+        requiresAuth: true,
+        title: '订单详情'
       }
     },
     {

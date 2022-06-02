@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import cookie from '@/plugins/cookie'
 import { Toast } from 'vant'
+import {UserInfo} from "../api/api";
 
 export const useUserStore = defineStore('userStore', {
   state: () => {
@@ -21,21 +22,11 @@ export const useUserStore = defineStore('userStore', {
     }
   },
   actions: {
-    async loginInFn() {
-      const toast = Toast.loading({
-        message: '加载中...'
+    loginInFn() {
+      this.$patch((state) => {
+        state.userInfo=state.demoUserInfo
       })
-      console.log('loginInFn')
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          toast.clear()
-          cookie.set(import.meta.env.VITE_token, this.demoCookie, { path: '/', expires: 7 })
-          this.$patch((state) => {
-            state.userInfo = state.demoUserInfo
-          })
-          resolve(this.demoUserInfo)
-        }, 1000)
-      })
+      console.log('userInfo', this.userInfo)
     },
     async loginOutFn() {
       const toast = Toast.loading({
@@ -59,15 +50,19 @@ export const useUserStore = defineStore('userStore', {
         message: '加载中...'
       })
       console.log('getUserInfoFn')
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          toast.clear()
-          this.$patch((state) => {
-            state.userInfo = state.demoUserInfo
-          })
-          resolve()
-        }, 1000)
-      })
+      //调用接口获取用户信息
+
+      let data = await UserInfo();
+      if (data.data.code===true){
+        this.$patch((state) => {
+          state.userInfo = data.data.data
+        })
+        console.log('userInfo', this.userInfo)
+        toast.clear()
+        }else {
+        toast.clear()
+        Toast.fail(data.msg)
+      }
     }
   }
 })

@@ -32,35 +32,6 @@
             :rules="[{ required: true, message: '请输入密码' }]"
           />
         </van-cell-group>
-        <van-cell-group v-else>
-          <van-field
-            v-model="phone"
-            name="phone"
-            label="手机号"
-            required
-            clearable
-            center
-            autocomplete="tel"
-            placeholder="请输入手机号"
-            :rules="[{ required: true, message: '请输入手机号' }, { pattern: phonePattern, message: '手机号格式有误' }]"
-          />
-          <van-field
-            v-model="sms"
-            name="sms"
-            label="短信验证码"
-            required
-            clearable
-            center
-            autocomplete="off"
-            placeholder="请输入短信验证码"
-            :rules="[{ required: true, message: '请输入短信验证码' }, { pattern: smsPattern, message: '短信验证码格式有误' }]"
-          >
-            <template #button>
-              <van-button v-if="smsBtnShow" size="small" type="primary" @click="sendSmsEvent">发送验证码</van-button>
-              <div v-else>{{ countDown.current.value.seconds }}秒</div>
-            </template>
-          </van-field>
-        </van-cell-group>
         <div class="form-button-box">
           <van-button round block type="primary" native-type="submit">登录</van-button>
         </div>
@@ -68,7 +39,7 @@
     </div>
     <div class="display-flex-between mg-small">
       <div class="button-text" @click="goRegisterPath">注册</div>
-      <div class="button-text" @click="goForgetPath">忘记密码</div>
+<!--      <div class="button-text" @click="goForgetPath">忘记密码</div>-->
     </div>
     <div class="page-footer">
       <div class="page-footer-wrap van-safe-area-bottom">
@@ -85,6 +56,9 @@ import { Toast } from 'vant'
 import { useCountDown } from '@vant/use'
 import { phonePattern, smsPattern } from '@/utils'
 import { useUserStore } from '@/store'
+import axios from "axios";
+import cookie from "../../plugins/cookie";
+import {Login} from "../../api/api";
 
 const router = useRouter()
 const route = useRoute()
@@ -97,8 +71,7 @@ function goForgetPath () {
 }
 
 const tabList = [
-  { label: '密码登录', value: 0 },
-  { label: '验证码登录', value: 1 }
+  { label: '登陆', value: 0 },
 ]
 const tabActive = ref(tabList[0].value)
 
@@ -125,31 +98,37 @@ const countDown = useCountDown({
 // 发送验证码
 function sendSmsEvent () {
   logoForm.value.validate('phone')
-    .then(res => {
-      smsBtnShow.value = false
-      countDown.start()
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => {
+        smsBtnShow.value = false
+        countDown.start()
+      })
+      .catch(err => {
+        console.log(err)
+      })
 }
 
+
 const userStore = useUserStore()
-const onSubmit = (values) => {
+const onSubmit = async (values) => {
   console.log('submit', values)
   if (!userAgreement.value) {
     Toast.fail('请阅读并勾选用户协议')
     return false
   }
-  userStore.loginInFn().then(res => {
-    if (route.query.from) {
-      router.push({ name: route.query.from })
-    } else {
-      router.push({ path: '/user' })
-    }
-  }).catch(err => {
-    console.log(err)
-  })
+  let data = await Login(values);
+  //toast.clear()
+  if (data.data.code!==true){
+    Toast.fail(data.data.msg)
+    return
+  }
+  cookie.set(import.meta.env.VITE_token, data.data.data.token, {path: '/'})
+  await userStore.getUserInfoFn()
+  console.log(data)
+  if (route.query.from) {
+    await router.push({name: route.query.from})
+  } else {
+    await router.push({path: '/user'})
+  }
 }
 </script>
 

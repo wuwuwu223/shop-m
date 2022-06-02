@@ -23,7 +23,7 @@ export const useLayoutTabbar = defineStore('layoutTabbar', {
           dot: false,
           badge: '',
           to: '/',
-          replace: true
+          replace: false
         },
         {
           name: 1,
@@ -36,15 +36,24 @@ export const useLayoutTabbar = defineStore('layoutTabbar', {
         },
         {
           name: 2,
-          title: '购物车',
-          icon: 'cart-o',
+          title: '发布商品',
+          icon: 'add-o',
+          dot: false,
+          badge: '',
+          to: '/good/publish/index',
+          replace: false
+        },
+        {
+          name: 3,
+          title: '消息',
+          icon: 'chat-o',
           dot: false,
           badge: '',
           to: '/shoppingCart',
           replace: true
         },
         {
-          name: 3,
+          name: 4,
           title: '我的',
           icon: 'user-o',
           dot: false,
@@ -69,7 +78,7 @@ export const useLayoutTabbar = defineStore('layoutTabbar', {
       if (validatorDetailObject(object)) {
         this.$patch((state) => {
           state.tabbar[object.index] = merge(this.tabbar[object.index], object.detail)
-        }) 
+        })
       }
     },
     /**
@@ -80,7 +89,7 @@ export const useLayoutTabbar = defineStore('layoutTabbar', {
       if (validatorDetailObject(object)) {
         this.$patch((state) => {
           state.tabbar.splice(object.index, 0, object.detail)
-        }) 
+        })
       }
     },
     /**
@@ -112,8 +121,8 @@ export const useLayoutTabbar = defineStore('layoutTabbar', {
     },
     /**
      * 根据 tabbar 中的 to ，返回对应的 name
-     * @param {String} path 
-     * @returns 
+     * @param {String} path
+     * @returns
      */
     pathToName(path) {
       let res = 0

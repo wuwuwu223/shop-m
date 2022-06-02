@@ -11,15 +11,40 @@ import {
   CellGroup,
   Dialog,
   Notify,
+  NoticeBar,
   Form,
   Field,
   Tab,
   Tabs,
   Checkbox,
+  Search,
   CheckboxGroup,
   Toast,
   Uploader,
-  ImagePreview
+  Card,
+  Grid,
+  ImagePreview,
+  SwipeItem,
+  Swipe,
+  GridItem,
+  SidebarItem,
+  Sidebar,
+  Col,
+  Row,
+  List,
+  ActionBarIcon,
+  ActionBar,
+  ActionBarButton,
+  ShareSheet,
+  AddressList,
+  AddressEdit,
+  SubmitBar,
+  ContactCard,
+  Skeleton,
+  Switch,
+  Tag,
+  Stepper,
+  ActionSheet
 } from 'vant'
 
 Toast.setDefaultOptions('loading', { forbidClick: true, duration: 0 })
@@ -27,6 +52,10 @@ Toast.allowMultiple()
 
 export default function (app) {
   app
+      .use(Row)
+      .use(Col)
+      .use(Sidebar)
+      .use(SidebarItem)
     .use(Button)
     .use(NavBar)
     .use(Tabbar)
@@ -48,4 +77,25 @@ export default function (app) {
     .use(Toast)
     .use(Uploader)
     .use(ImagePreview)
+    .use(Card)
+    .use(Swipe)
+    .use(SwipeItem)
+      .use(Search)
+      .use(NoticeBar)
+      .use(Grid)
+      .use(GridItem)
+      .use(List)
+      .use(ActionBarIcon)
+      .use(ActionBar)
+      .use(ActionBarButton)
+      .use(ShareSheet)
+      .use(AddressList)
+      .use(AddressEdit)
+      .use(SubmitBar)
+      .use(ContactCard)
+      .use(Skeleton)
+      .use(Switch)
+      .use(Tag)
+      .use(Stepper)
+      .use(ActionSheet)
 }

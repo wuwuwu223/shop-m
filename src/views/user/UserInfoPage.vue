@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { Toast } from 'vant'
@@ -35,11 +35,6 @@ const featureList = computed(() => {
       title: '修改密码',
       value: '',
       to: '/changePassword'
-    },
-    {
-      title: '我的地址',
-      value: userInfo.name,
-      to: ''
     }
   ]
 })
