@@ -78,9 +78,6 @@
         </van-cell-group>
       </van-checkbox-group>
 
-
-
-
     </div>
   </van-action-sheet>
 </template>
@@ -109,7 +106,6 @@ const openActionSheet = () => {
   show.value = true;
 };
 const toggle = (index) => {
-
   goodType_selected.value[index].toggle();
   console.log(checked.value)
 };

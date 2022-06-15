@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import permission from './permission'
 import demoRouters from './demo'
 
@@ -20,6 +20,9 @@ const ChangePasswordPage = () => import('../views/user/ChangePasswordPage.vue')
 const AddressList = () => import('../views/address/addresslist.vue')
 const addressEdit = () => import('../views/address/addressEdit.vue')
 const OrderDetail = () => import('../views/order/OrderDetail.vue')
+const OrderList = () => import('../views/order/OrderList.vue')
+const orderView = () => import('../views/order/TradeDetail.vue')
+const SellList = () => import('../views/order/SellList.vue')
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -156,7 +159,34 @@ const router = createRouter({
       component: OrderDetail,
       meta: {
         requiresAuth: true,
+        title: '订单预览'
+      }
+    },
+    {
+      path: '/orderView',
+      name: 'orderView',
+      component: orderView(),
+      meta: {
+        requiresAuth: true,
         title: '订单详情'
+      }
+    },
+    {
+      path: '/orderList',
+      name: 'orderList',
+      component: OrderList(),
+      meta: {
+        requiresAuth: true,
+        title: '我买到的'
+      }
+    },
+    {
+      path: '/sellList',
+      name: 'sellList',
+      component: SellList(),
+      meta: {
+        requiresAuth: true,
+        title: '我卖出的'
       }
     },
     {

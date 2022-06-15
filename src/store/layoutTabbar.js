@@ -43,15 +43,15 @@ export const useLayoutTabbar = defineStore('layoutTabbar', {
           to: '/good/publish/index',
           replace: false
         },
-        {
-          name: 3,
-          title: '消息',
-          icon: 'chat-o',
-          dot: false,
-          badge: '',
-          to: '/shoppingCart',
-          replace: true
-        },
+        // {
+        //   name: 3,
+        //   title: '消息',
+        //   icon: 'chat-o',
+        //   dot: false,
+        //   badge: '',
+        //   to: '/shoppingCart',
+        //   replace: true
+        // },
         {
           name: 4,
           title: '我的',

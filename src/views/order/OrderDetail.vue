@@ -24,12 +24,29 @@
 <script setup>
 import {Toast} from "vant";
 import {onBeforeMount, ref} from "vue";
-import {GoodsDetail} from "../../api/api";
-import {useRoute} from "vue-router";
+import {CreateOrder, GoodsDetail} from "../../api/api";
+import {useRoute, useRouter} from "vue-router";
+import router from "../../router";
 const tel = ref('13000000000');
 const name = ref('张三');
 const onEdit = () => Toast('edit');
-const onSubmit = () => Toast('点击按钮');
+const onSubmit = async () => {
+  //CreateOrder
+  const router=useRouter();
+  const data = {
+      name: name.value,
+      tel: tel.value,
+      address: address.value,
+      good_id: getId()
+    }
+  const res = await CreateOrder(data);
+  if (res.data.code) {
+    Toast(res.data.msg);
+    await router.replace('/OrderView' + '?id=' + res.data.data.order_id);
+  } else {
+    Toast(res.data.msg);
+  }
+};
 const goodDetail=ref({})
 const address=ref('湖北省宜昌市 西陵区 大学路 三峡大学')
 const show = ref(false);

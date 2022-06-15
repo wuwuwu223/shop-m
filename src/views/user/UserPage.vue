@@ -60,21 +60,30 @@ function userImgPreview () {
 }
 
 const cellList = reactive([
+  // {
+  //   title: '钱包',
+  //   value: '',
+  //   label: '',
+  //   icon: 'paid',
+  //   to: '',
+  //   border: true,
+  //   'is-link': true
+  // },
   {
-    title: '钱包',
+    title: '我买到的',
     value: '',
     label: '',
-    icon: 'paid',
-    to: '',
+    icon: 'balance-list-o',
+    to: '/orderList',
     border: true,
     'is-link': true
   },
   {
-    title: '订单',
+    title: '我卖出的',
     value: '',
     label: '',
     icon: 'balance-list-o',
-    to: '',
+    to: '/sellList',
     border: true,
     'is-link': true
   },
@@ -87,15 +96,15 @@ const cellList = reactive([
     border: true,
     'is-link': true
   },
-  {
-    title: '设置',
-    value: '',
-    label: '',
-    icon: 'setting-o',
-    to: '',
-    border: true,
-    'is-link': true
-  }
+  // {
+  //   title: '设置',
+  //   value: '',
+  //   label: '',
+  //   icon: 'setting-o',
+  //   to: '',
+  //   border: true,
+  //   'is-link': true
+  // }
 ])
 </script>
 
